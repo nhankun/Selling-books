@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
+
+    protected $fillable = ['name','desc','category_id','price','quanlity','status','author_id','publishing_com','number_of_pages','cover_type','publication_date','release_com'];
     //
     public function Order_detail()
     {

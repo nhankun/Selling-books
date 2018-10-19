@@ -4,7 +4,7 @@
 <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="#">Category</a>
+              <a href="{{ route('categories.index') }}">Category</a>
             </li>
             <li class="breadcrumb-item active">Add</li>
           </ol>
@@ -27,11 +27,11 @@
                 {{Session::get('success')}}
               </div>
               @endif
-              @if (Session::has('errors'))
+              {{-- @if (Session::has('errors'))
               <div class="alert alert-warning">
                 {{Session::get('errors')}}
               </div>
-              @endif
+              @endif --}}
 
               <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('categories.store') }}">
                   @csrf

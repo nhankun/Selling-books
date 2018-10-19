@@ -4,7 +4,7 @@
 <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{ route('categories.index') }}">Category</a>
+              <a href="{{ route('book.index') }}">Books</a>
             </li>
             <li class="breadcrumb-item active">list</li>
           </ol>
@@ -45,20 +45,42 @@
                     <tr style="text-align: center;">
                       <th>Id</th>
                       <th>Name</th>
+                      <th>Desc</th>
+                      <th>Categoy_id</th>
+                      <th>Price</th>
                       <th>Image</th>
+                      <th>Quanlity</th>
+                      <th>Status</th>
+                      <th>author_id</th>
+                      <th>publishing_com</th>
+                      <th>number_of_pages</th>
+                      <th>cover_type</th>
+                      <th>publication_date</th>
+                      <th>release_com</th>
                       <th>Edit</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($categories as $category)
+                    @foreach($books as $book)
                     <tr>
-                      <td>{{ $category->id }}</td>
-                      <td>{{ $category->name }}</td>
-                      <td style="text-align: center;"><img src="{{ asset('storage/'.$category->img) }}" style="width: 50px;"></td>
-                      <td style="text-align: center;"><a href="{{ route('categories.edit', $category->id) }}">Edit</a></td>
+                      <td>{{ $book->id }}</td>
+                      <td>{{ $book->name }}</td>
+                      <td>{{ $book->desc }}</td>
+                      <td>{{ $book->category_id }}</td>
+                      <td>{{ $book->price }}</td>
+                      <td><img src="{{asset('storage/'.$book->Images[0]->path)}}" width="80px"></td>
+                      <td>{{ $book->quanlity }}</td>
+                      <td>{{ $book->status }}</td>
+                      <td>{{ $book->author_id }}</td>
+                      <td>{{ $book->publishing_com }}</td>
+                      <td>{{ $book->number_of_pages }}</td>
+                      <td>{{ $book->cover_type }}</td>
+                      <td>{{ $book->publication_date }}</td>
+                      <td>{{ $book->release_com }}</td>
+                      <td style="text-align: center;"><a href="{{ route('book.edit', $book->id) }}">Edit</a></td>
                       <td style="text-align: center;">
-                        <button type="submit" value="{{$category->id}}" class="btn btn-danger btndelete">
+                        <button type="submit" value="{{$book->id}}" class="btn btn-danger btndelete">
                           <i class="fas fa-trash-alt"></i> 
                         </button>
                       </td>
@@ -66,7 +88,7 @@
                     @endforeach
                   </tbody>
                 </table>
-                  {{ $categories->links()}}
+                  {{ $books->links()}}
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
         </div>
@@ -76,7 +98,7 @@ $(document).ready(function(){
     var button = $('.btndelete');
     button.click(function(){
         if (confirm("Do you want to delete?")) {
-            var url = '{{ route("categories.destroy", ":id") }}';
+            var url = '{{ route("book.destroy", ":id") }}';
             url = url.replace(':id', $(this).val());
             window.location.href=url;
         }

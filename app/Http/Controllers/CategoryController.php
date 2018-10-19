@@ -39,11 +39,14 @@ class CategoryController extends Controller
         $validator = $request->validate(
             [
               'name'=>'required|max:255',
-              'img'=>'required'
+              'img'=>'required',
+               'name'=>'unique:categories,name',
+                
             ],
             [
              'required' => 'Cột :attribute là bắt buộc.',
              'max' => 'Cột :attribute độ dài phải nhỏ hơn :max .',
+             'name.unique'=> $request->name.' already exists'
            ]
          );
 
@@ -78,7 +81,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('admin.Category.edit',compact('category'));
     }
 
     /**
@@ -90,7 +94,27 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $validator = $request->validate(
+            [
+              'name'=>'required|max:255',
+              'img'=>'required',
+               'name'=>'unique:categories,name',
+            ],
+            [
+             'required' => 'Cột :attribute là bắt buộc.',
+             'max' => 'Cột :attribute độ dài phải nhỏ hơn :max .',
+             'name.unique'=> $request->name.' already exists'
+           ]
+         );
+
+         $category = Category::find($id);
+         $category->name=$request->name;
+         if ($request->file('img')) {
+                $path = $request->file('img')->store('images');
+                $category->img=$path;
+        } 
+        $category->save();  
+        return redirect()->route('categories.edit',compact('category'))->withSuccess('Edit category successfully');
     }
 
     /**
@@ -101,6 +125,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $size = count($category->Books);
+        if ($size == 0) {
+            $category->delete();
+            return redirect()->route('categories.index')->withSuccess('Delete category successfully');
+        }
+        return redirect()->route('categories.index')->withError('Cannot delete!');
     }
 }

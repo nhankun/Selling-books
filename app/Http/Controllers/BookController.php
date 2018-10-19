@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Book;
+use App\Image;
 
 class BookController extends Controller
 {
@@ -13,7 +15,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::orderBy('id', 'desc')->paginate(10);
+        return view('admin.Book.list',compact('books'));
     }
 
     /**
@@ -23,7 +26,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+         return view('admin.Book.add');
     }
 
     /**
@@ -34,7 +37,17 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = Book::create($request->all());
+        if($request->file('img')){
+            foreach($request->file('img') as $image){
+                $path=$image->store('images');
+                $img= Image::create([
+                    'path' =>$path, 
+                    'book_id' => $book->id
+                ]);
+            }        
+        }
+        return redirect()->route('book.create')->with('success', 'Create a new book successfully');
     }
 
     /**

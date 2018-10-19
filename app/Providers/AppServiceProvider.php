@@ -18,7 +18,11 @@ class AppServiceProvider extends ServiceProvider
          // Using class based composers...
         View::composer(
             '*', 'App\Http\ViewComposers\CategoryComposer'
+            
         );  
+        View::composer(
+            '*', 'App\Http\ViewComposers\AuthorComposer'
+        );
     }
 
     /**
