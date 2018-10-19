@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 
 class CategoryController extends Controller
 {
@@ -13,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy('id', 'desc')->paginate(5);
+        return view('admin.Category.list',compact('categories'));
     }
 
     /**
@@ -23,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.Category.add');
     }
 
     /**
@@ -34,7 +36,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $request->validate(
+            [
+              'name'=>'required|max:255',
+              'img'=>'required'
+            ],
+            [
+             'required' => 'Cột :attribute là bắt buộc.',
+             'max' => 'Cột :attribute độ dài phải nhỏ hơn :max .',
+           ]
+         );
+
+        $category = new Category();
+        $category->name=$request->name;
+        if ($request->file('img')) {
+                $path = $request->file('img')->store('images');
+                $category->img=$path;
+        } 
+        $category->save();  
+
+        return redirect()->route('categories.create')->withSuccess('Create a new category successfully');
+
     }
 
     /**

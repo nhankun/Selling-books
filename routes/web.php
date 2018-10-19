@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix'=>'admin'], function(){
+
+	Route::get('/', function(){ return view('admin.dashboard');} )->name('admin.index');
+
+	Route::group(['prefix'=>'categories'], function(){
+		Route::get('/', 'CategoryController@index')->name('categories.index');
+		Route::get('/create', 'CategoryController@create')->name('categories.create');
+		Route::post('/create', 'CategoryController@store')->name('categories.store');
+	});
+
+});
