@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Image;
+use App\Book;
 
 class ImageController extends Controller
 {
@@ -13,7 +15,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        $images = Image::orderBy('book_id', 'desc')->paginate(10);
+        return view('admin.image.list',compact('images'));
     }
 
     /**
@@ -23,7 +26,7 @@ class ImageController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.image.add');
     }
 
     /**
@@ -34,7 +37,18 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        if ($request->file('img')) {
+            foreach($request->file('img') as $image){
+                $images = new Image();
+                $images->book_id=$request->book_id;
+                $path=$image->store('images');
+                $images->path=$path;
+                $images->save();
+            }
+        } 
+        
+        return redirect()->route('image.index')->with('success', 'Create image successfully');
     }
 
     /**
@@ -56,7 +70,8 @@ class ImageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $image = Image::find($id);
+        return view('admin.image.edit', compact('image'));
     }
 
     /**
@@ -68,7 +83,14 @@ class ImageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $image = Image::find($id);
+        if ($request->file('img')) {
+            $image->book_id = $image->book_id;
+            $path=$request->file('img')->store('images');
+            $image->path = $path;
+        }
+        $image->save();
+        return redirect()->route('image.index')->with('success', 'Edit Image successfully');
     }
 
     /**
@@ -79,6 +101,8 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image = Image::find($id);
+        $image->delete();
+        return redirect()->route('image.index')->with('success', 'Delete Image successfully');
     }
 }

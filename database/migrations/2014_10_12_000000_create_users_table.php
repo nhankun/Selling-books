@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('phone');
             $table->boolean('activations')->nullable();
-            $table->boolean('is_admin')->nullable();
+            $table->boolean('is_admin')->default(false);
             $table->integer('user_Type')->default(0);
             $table->rememberToken();
             $table->timestamps();

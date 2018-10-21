@@ -14,7 +14,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::orderBy('id', 'desc')->paginate(10);
+        return view('admin.author.list', compact('authors'));
     }
 
     /**
@@ -24,7 +25,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.author.add');
     }
 
     /**
@@ -35,7 +36,8 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $author = Author::create($request->all());
+        return redirect()->route('author.index')->with('success', 'Create author successfully');
     }
 
     /**
@@ -55,9 +57,10 @@ class AuthorController extends Controller
      * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function edit(Author $author)
+    public function edit($id)
     {
-        //
+        $author = Author::find($id);
+        return view('admin.author.edit',compact('author'));
     }
 
     /**
@@ -67,9 +70,11 @@ class AuthorController extends Controller
      * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Author $author)
+    public function update(Request $request, $id)
     {
-        //
+        $author = Author::find($id);
+        $author->update($request->all());
+        return redirect()->route('author.index')->with('success', 'Edit author successfully');
     }
 
     /**
@@ -78,8 +83,15 @@ class AuthorController extends Controller
      * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Author $author)
+    public function destroy($id)
     {
-        //
+        $author = Author::find($id);
+        $size = count($author->books);
+        if($size == 0){
+            $author->delete();
+            return redirect()->route('author.index')->with('success', 'Delete author successfully');
+        }
+        return redirect()->route('author.index')->with('errors', 'Cannot delete!');
+        
     }
 }

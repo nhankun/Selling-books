@@ -4,7 +4,7 @@
 <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{ route('book.index') }}">Books</a>
+              <a href="{{ route('image.index') }}">Image Of Book</a>
             </li>
             <li class="breadcrumb-item active">list</li>
           </ol>
@@ -44,52 +44,23 @@
                   <thead>
                     <tr style="text-align: center;">
                       <th>Id</th>
-                      <th>Name</th>
+                      <th>Book_id</th>
+                      <th>Book_name</th>
                       <th>Image</th>
-                      <th>Desc</th>
-                      <th>Category</th>
-                      <th>Price</th>
-                      <th>quanlity</th>
-                      <th>price_sale</th>
-                      <th>release_com</th>
-                      <th>author</th>
-                      <th>publication_date</th>
-                      <th>size</th>
-                      <th>publishing_com</th>
-                      <th>translator</th>
-                      <th>cover_type</th>
-                      <th>number_of_pages</th>
                       <th>Edit</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($books as $book)
+                    @foreach($images as $image)
                     <tr>
-                      <td>{{ $book->id }}</td>
-                      <td>{{ $book->name }}</td>
-                      <td>
-                        @if(count($book->images) != 0)
-                        <img src="{{asset('storage/'.$book->images[0]->path)}}" width="80px"></td>
-                        @else
-                        <p>No Image</p>
-                        @endif
-                      <td><input type="hidden" value="{{ $book->desc }}"><span style="color: red;">Vào edit để xem desc</span></td>
-                      <td>{{ $book->category->name ?? '' }}</td>
-                      <td>{{ $book->price }}</td>
-                      <td>{{ $book->quanlity }}</td>
-                      <td>{{ $book->price_sale }}</td>
-                      <td>{{ $book->release_com }}</td>
-                      <td>{{ $book->author->name ?? '' }}</td>
-                      <td>{{ $book->publication_date }}</td>
-                      <td>{{ $book->size }}</td>
-                      <td>{{ $book->publishing_com }}</td>
-                      <td>{{ $book->translator }}</td>
-                      <td>{{ $book->cover_type }}</td>
-                      <td>{{ $book->number_of_pages }}</td>
-                      <td style="text-align: center;"><a href="{{ route('book.edit', $book->id) }}">Edit</a></td>
+                      <td>{{ $image->id }}</td>
+                      <td>{{ $image->book_id }}</td>
+                      <td>{{ $image->book->name ?? '' }}</td>
+                      <td style="text-align: center;"><img src="{{ asset('storage/'.$image->path) }}" style="width: 50px;"></td>
+                      <td style="text-align: center;"><a href="{{ route('image.edit', $image->id) }}">Edit</a></td>
                       <td style="text-align: center;">
-                        <button type="submit" value="{{$book->id}}" class="btn btn-danger btndelete">
+                        <button type="submit" value="{{$image->id}}" class="btn btn-danger btndelete">
                           <i class="fas fa-trash-alt"></i> 
                         </button>
                       </td>
@@ -97,7 +68,7 @@
                     @endforeach
                   </tbody>
                 </table>
-                  {{ $books->links()}}
+                  {{ $images->links()}}
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
         </div>
@@ -107,7 +78,7 @@ $(document).ready(function(){
     var button = $('.btndelete');
     button.click(function(){
         if (confirm("Do you want to delete?")) {
-            var url = '{{ route("book.destroy", ":id") }}';
+            var url = '{{ route("image.destroy", ":id") }}';
             url = url.replace(':id', $(this).val());
             window.location.href=url;
         }

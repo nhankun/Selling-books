@@ -46,7 +46,7 @@
                           <div class="form-group">
                             <label class="control-label col-sm-12" for="desc">Book desc:</label>
                             <div class="col-sm-12">
-                              <textarea class="form-control" id="desc" placeholder="Enter desc" name="desc" rows="3" required=""></textarea>
+                              <textarea class="form-control" id="desc" placeholder="Enter desc" name="desc" rows="3" ></textarea>
                             </div>
                           </div>
                           <div class="form-group col-sm-12">
@@ -70,13 +70,25 @@
                             </div>
                           </div>
                           <div class="form-group">
-                            <label class="control-label col-sm-12" for="status">Book status:</label>
+                            <label class="control-label col-sm-12" for="price_sale">Book price_sale:</label>
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" id="status" placeholder="Enter status" name="status" required="">
+                              <input type="number" class="form-control" id="price_sale" placeholder="Enter price_sale" name="price_sale" >
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-sm-12" for="img">Book Image:</label>
+                            <div class="col-sm-12">          
+                              <input type="file" name="img[]" multiple required="" required="" class="btn" id="img">
                             </div>
                           </div>
                   </div>
                   <div class="col-md-6" style="float: right;">
+                        <div class="form-group">
+                          <label class="control-label col-sm-12" for="release_com">Book release_com:</label>
+                          <div class="col-sm-12">
+                            <input type="text" class="form-control" id="release_com" placeholder="Enter release_com" name="release_com">
+                          </div>
+                        </div>
                         <div class="form-group col-sm-12">
                           <label class="control-label" for="author_id">Author_id:</label>
                           <select class="form-control" name="author_id" required="">
@@ -86,15 +98,27 @@
                           </select>
                         </div>
                         <div class="form-group">
+                          <label class="control-label col-sm-12" for="publication_date">Book publication_date:</label>
+                          <div class="col-sm-12">
+                            <input type="date" class="form-control" id="publication_date" placeholder="Enter publication_date" name="publication_date" required="">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-sm-12" for="size">Book size:</label>
+                          <div class="col-sm-12">
+                            <input type="text" class="form-control" id="size" placeholder="Enter size" name="size" required="">
+                          </div>
+                        </div>
+                        <div class="form-group">
                           <label class="control-label col-sm-12" for="publishing_com">Book publishing_com:</label>
                           <div class="col-sm-12">
                             <input type="text" class="form-control" id="publishing_com" placeholder="Enter publishing_com" name="publishing_com" required="">
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="control-label col-sm-12" for="number_of_pages">Book number_of_pages:</label>
+                          <label class="control-label col-sm-12" for="translator">Book translator:</label>
                           <div class="col-sm-12">
-                            <input type="number" class="form-control" id="number_of_pages" placeholder="Enter number_of_pages" name="number_of_pages" required="">
+                            <input type="text" class="form-control" id="translator" placeholder="Enter translator" name="translator" >
                           </div>
                         </div>
                         <div class="form-group">
@@ -104,28 +128,20 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="control-label col-sm-12" for="publication_date">Book publication_date:</label>
+                          <label class="control-label col-sm-12" for="number_of_pages">Book number_of_pages:</label>
                           <div class="col-sm-12">
-                            <input type="date" class="form-control" id="publication_date" placeholder="Enter publication_date" name="publication_date" required="">
+                            <input type="number" class="form-control" id="number_of_pages" placeholder="Enter number_of_pages" name="number_of_pages" required="">
                           </div>
                         </div>
-                        <div class="form-group">
-                          <label class="control-label col-sm-12" for="release_com">Book release_com:</label>
-                          <div class="col-sm-12">
-                            <input type="text" class="form-control" id="release_com" placeholder="Enter release_com" name="release_com" required="">
-                          </div>
-                        </div>
+                        
+                        
+                        
                   </div>
                 </div>
 
                 <div style="clear: both;"></div>
 
-                <div class="form-group">
-                  <label class="control-label col-sm-2" for="img">Book Image:</label>
-                  <div class="col-sm-12">          
-                    <input type="file" name="img[]" multiple required="" class="btn" id="img">
-                  </div>
-                </div>
+                
                 
                 <div class="form-inline">        
                   <div class="col-sm-offset-1 col-sm-1">

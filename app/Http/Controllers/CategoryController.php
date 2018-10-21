@@ -39,7 +39,6 @@ class CategoryController extends Controller
         $validator = $request->validate(
             [
               'name'=>'required|max:255',
-              'img'=>'required',
                'name'=>'unique:categories,name',
                 
             ],
@@ -97,7 +96,6 @@ class CategoryController extends Controller
          $validator = $request->validate(
             [
               'name'=>'required|max:255',
-              'img'=>'required',
                'name'=>'unique:categories,name',
             ],
             [

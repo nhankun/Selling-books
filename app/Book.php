@@ -7,21 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
 
-    protected $fillable = ['name','desc','category_id','price','quanlity','status','author_id','publishing_com','number_of_pages','cover_type','publication_date','release_com'];
+    protected $fillable = ['name','desc','category_id','price','quanlity','price_sale','release_com','author_id','publication_date','size','publishing_com','translator','cover_type','number_of_pages'];
     //
-    public function Order_detail()
+    public function order_details()
     {
-        return $this->belongsTo('App\Order_detail');
+        return $this->hasMany('App\Order_detail');
     }
-    public function Author()
+    public function author()
     {
-        return $this->belongsTo('App\Author');
+        return $this->belongsTo('App\Author')->withDefault([
+        'name' => 'Guest Author'
+        ]);
     }
-    public function Category()
+    public function category()
     {
         return $this->belongsTo('App\Category');
     }
-    public function Images()
+    public function images()
     {
         return $this->hasMany('App\Image');
     } 

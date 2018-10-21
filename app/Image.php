@@ -9,7 +9,7 @@ class Image extends Model
     //
     protected $fillable = ['book_id','path'];
 
-    public function Book()
+    public function book()
     {
         return $this->belongsTo('App\Book');
     }

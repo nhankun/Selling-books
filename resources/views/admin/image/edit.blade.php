@@ -4,9 +4,9 @@
 <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{ route('categories.index') }}">Category</a>
+              <a href="{{ route('image.index') }}">Images</a>
             </li>
-            <li class="breadcrumb-item active">Add</li>
+            <li class="breadcrumb-item active">Edit</li>
           </ol>
 
 
@@ -33,24 +33,32 @@
               </div>
               @endif --}}
 
-              <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('categories.store') }}">
+              <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('image.update', $image->id) }}">
+                  @method('put')
                   @csrf
-                <div class="form-group">
-                  <label class="control-label col-sm-2" for="name">Category name:</label>
-                  <div class="col-sm-12">
-                    <input type="text" class="form-control" id="name" required="" placeholder="Enter name" name="name">
-                  </div>
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="category_id">Book_id:</label>
+                  <select class="form-control" name="book_id" required="" disabled="">
+                      @foreach($BookCom as $BookCom_id => $BookCom_name)
+                        <option value="{{ $BookCom_id }}"
+                           @if(old('BookCom_id', isset($image) ? $image->book_id : '') == $BookCom_id) 
+                              selected="selected"
+                            @endif
+                        >{{ $BookCom_name }}</option>
+                      @endforeach
+                  </select>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="img">Category Image:</label>
-                  <div class="col-sm-12">          
-                    <input type="file" class="btn" id="img" name="img">
+                  <label class="control-label col-sm-2" for="img">Book Image:</label>
+                  <div class="col-sm-12">
+                    <img src="{{ asset('storage/'.$image->path) }}" style="width: 50px;">          
+                    <input type="file" name="img" required="" class="btn" id="img">
                   </div>
                 </div>
                 
                 <div class="form-inline">        
                   <div class="col-sm-offset-1 col-sm-1">
-                    <button type="submit" class="btn btn-info">Add</button>
+                    <button type="submit" class="btn btn-info">Edit</button>
                   </div>
                   <div>
                     <button type="reset" class="btn btn-info">Reset</button>

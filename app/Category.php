@@ -9,7 +9,7 @@ class Category extends Model
     //
     protected $fillable = ['name','img'];
 
-    public function Books()
+    public function books()
     {
         return $this->hasMany('App\Book');
     } 

@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
         View::composer(
             '*', 'App\Http\ViewComposers\AuthorComposer'
         );
+        View::composer(
+            '*', 'App\Http\ViewComposers\BookComposer'
+        );
     }
 
     /**

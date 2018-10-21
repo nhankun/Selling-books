@@ -34,6 +34,5 @@ class CreateOrdersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('orders');
-        $table->dropForeign(['user_id']);
     }
 }

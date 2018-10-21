@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Order_detail extends Model
 {
     //
-    public function Order()
+    public function order()
     {
         return $this->belongsTo('App\Order');
     }
 
-    public function Books()
+    public function book()
     {
-        return $this->hasMany('App\Book');
+        return $this->belongsTo('App\Book');
     } 
 }

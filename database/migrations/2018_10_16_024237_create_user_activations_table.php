@@ -30,6 +30,5 @@ class CreateUserActivationsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('user_activations');
-        $table->dropForeign(['user_id']);
     }
 }

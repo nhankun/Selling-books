@@ -16,19 +16,19 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->string('desc');
+            $table->text('desc')->nullable();
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->double('price');
             $table->integer('quanlity');
-            $table->string('status');
-            $table->string('release_com');
+            $table->double('price_sale')->nullable();
+            $table->string('release_com')->nullable();
             $table->integer('author_id')->unsigned();
             $table->foreign('author_id')->references('id')->on('authors');
             $table->dateTime('publication_date');
             $table->string('size');
             $table->string('publishing_com');
-            $table->string('translator');
+            $table->string('translator')->nullable();
             $table->string('cover_type');
             $table->integer('number_of_pages');
             $table->timestamps();
@@ -43,7 +43,5 @@ class CreateBooksTable extends Migration
     public function down()
     {
         Schema::dropIfExists('books');
-        $table->dropForeign(['category_id']);
-        $table->dropForeign(['author_id']);
     }
 }

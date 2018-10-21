@@ -69,7 +69,8 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book = Book::find($id);
+        return view('admin.Book.edit',compact('book'));
     }
 
     /**
@@ -81,7 +82,9 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $book = Book::find($id);
+        $book->update($request->all());
+        return redirect()->route('book.index')->with('success', 'Edit a book successfully');
     }
 
     /**
@@ -92,6 +95,13 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Book::find($id);
+        $size = count($book->Order_details);
+        $imgcount = count($book->Images);
+        if ($size == 0 && $imgcount == 0) {
+            $book->delete();
+            return redirect()->route('book.index')->with('success', 'Delete book successfully');
+        }
+        return redirect()->route('book.index')->with('errors', 'Cannot delete!');
     }
 }

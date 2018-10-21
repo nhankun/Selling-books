@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Author extends Model
 {
     //
-    protected $fillable = ['name','address','phone'];
+    protected $fillable = ['name','address','email' ,'phone'];
 
-    public function Books()
+    public function books()
     {
         return $this->hasMany('App\Book');
     } 

@@ -19,9 +19,8 @@ class CreateOrderDetailsTable extends Migration
             $table->foreign('order_id')->references('id')->on('orders');
             $table->integer('book_id')->unsigned();
             $table->foreign('book_id')->references('id')->on('books');
-            $table->double('subtotal');
             $table->integer('quanlity');
-
+            $table->double('subtotal');
             $table->timestamps();
         });
     }
@@ -34,7 +33,5 @@ class CreateOrderDetailsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('order_details');
-        $table->dropForeign(['order_id']);
-        $table->dropForeign(['book_id']);
     }
 }

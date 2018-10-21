@@ -42,7 +42,7 @@
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="name">Category name:</label>
                   <div class="col-sm-12">
-                    <input type="text" class="form-control" id="name" value="{{ $category->name }}" name="name">
+                    <input type="text" class="form-control" id="name" required="" value="{{ $category->name }}" name="name">
                   </div>
                 </div>
                 <div class="form-group">

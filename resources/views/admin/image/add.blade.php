@@ -4,7 +4,7 @@
 <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{ route('categories.index') }}">Category</a>
+              <a href="{{ route('image.index') }}">Images</a>
             </li>
             <li class="breadcrumb-item active">Add</li>
           </ol>
@@ -33,18 +33,20 @@
               </div>
               @endif --}}
 
-              <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('categories.store') }}">
+              <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('image.store') }}">
                   @csrf
-                <div class="form-group">
-                  <label class="control-label col-sm-2" for="name">Category name:</label>
-                  <div class="col-sm-12">
-                    <input type="text" class="form-control" id="name" required="" placeholder="Enter name" name="name">
-                  </div>
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="category_id">Book_id:</label>
+                  <select class="form-control" name="book_id" required="">
+                      @foreach($BookCom as $BookCom_id => $BookCom_name)
+                        <option value="{{ $BookCom_id }}">{{ $BookCom_name }}</option>
+                      @endforeach
+                  </select>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="img">Category Image:</label>
+                  <label class="control-label col-sm-2" for="img">Book Image:</label>
                   <div class="col-sm-12">          
-                    <input type="file" class="btn" id="img" name="img">
+                    <input type="file" name="img[]" multiple required="" required="" class="btn" id="img">
                   </div>
                 </div>
                 

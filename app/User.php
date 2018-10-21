@@ -28,12 +28,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function Orders()
+    public function orders()
     {
         return $this->hasMany('App\Order');
     } 
 
-    public function User_activations()
+    public function user_activations()
     {
         return $this->hasMany('App\User_activation');
     }
